@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Editors and AI-assistant notes
+.vscode/
+.idea/
+.claude/
+CLAUDE.md
+
+# Logs, OS files, temp
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Generated media and large binaries
+*.mp4
+*.mov
+*.webm
+*.mkv
+*.safetensors
+*.ckpt
+*.gguf
+*.zip

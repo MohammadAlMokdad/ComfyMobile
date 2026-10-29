@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#121316">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Comfy">
+  <link rel="apple-touch-icon" href="app/icon.png">
+  <link rel="icon" href="app/icon.png">
+  <link rel="manifest" href="app/manifest.json">
+  <link rel="stylesheet" href="app/app.css">
+  <title>Comfy Mobile</title>
+</head>
+<body>
+  <header class="topbar">
+    <a id="back" class="back" href="#" hidden aria-label="Back to workflows">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <h1 id="title">Comfy</h1>
+    <button id="conn" class="conn" type="button" aria-label="Connection status"><span></span></button>
+  </header>
+
+  <div id="offline" class="offline" hidden>
+    Can't reach your PC. Check that Tailscale is on and ComfyUI is open.
+  </div>
+  <div id="update" class="offline update" hidden>
+    The phone app was updated. Restart ComfyUI on your PC to finish the update.
+  </div>
+
+  <main>
+    <section id="view-home" class="view"></section>
+    <section id="view-template" class="view" hidden></section>
+    <section id="view-recent" class="view" hidden></section>
+  </main>
+
+  <a id="job-pill" class="job-pill" href="#" hidden></a>
+
+  <nav class="tabs">
+    <a href="#" data-tab="create">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/></svg>
+      Create
+    </a>
+    <a href="#/recent" data-tab="recent">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+      Recent
+    </a>
+  </nav>
+
+  <div id="viewer" class="viewer" hidden></div>
+
+  <script type="module" src="app/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "portrait_model_denim.png"
+    },
+    "_meta": {
+      "title": "Photo"
+    }
+  },
+  "10": {
+    "class_type": "LoadBackgroundRemovalModel",
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "_meta": {
+      "title": "LoadBackgroundRemovalModel"
+    }
+  },
+  "11": {
+    "class_type": "RemoveBackground",
+    "inputs": {
+      "bg_removal_model": [
+        "10",
+        0
+      ],
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "Find the subject"
+    }
+  },
+  "12": {
+    "class_type": "InvertMask",
+    "inputs": {
+      "mask": [
+        "11",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "InvertMask"
+    }
+  },
+  "13": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "alpha": [
+        "12",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "JoinImageWithAlpha"
+    }
+  },
+  "8": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "mobile/no-background",
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "SaveImage"
+    }
+  }
+}

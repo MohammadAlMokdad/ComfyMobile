@@ -1,0 +1,351 @@
+{
+ "id": "73cfc96e-4af4-4b48-9877-149546151bdf",
+ "revision": 0,
+ "last_node_id": 13,
+ "last_link_id": 6,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "LoadImage",
+   "pos": [
+    100,
+    130
+   ],
+   "size": [
+    282.798828125,
+    314
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "image",
+     "name": "image",
+     "type": "COMBO",
+     "widget": {
+      "name": "image"
+     },
+     "link": null
+    },
+    {
+     "localized_name": "choose file to upload",
+     "name": "upload",
+     "type": "IMAGEUPLOAD",
+     "widget": {
+      "name": "upload"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "IMAGE",
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      3,
+      5
+     ]
+    },
+    {
+     "localized_name": "MASK",
+     "name": "MASK",
+     "type": "MASK",
+     "links": null
+    }
+   ],
+   "title": "Photo",
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "portrait_model_denim.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "portrait_model_denim.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 8,
+   "type": "SaveImage",
+   "pos": [
+    1329.2580078125002,
+    130
+   ],
+   "size": [
+    270,
+    58
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "images",
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1
+    },
+    {
+     "localized_name": "filename_prefix",
+     "name": "filename_prefix",
+     "type": "STRING",
+     "widget": {
+      "name": "filename_prefix"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "images",
+     "name": "images",
+     "type": "IMAGE",
+     "links": null
+    }
+   ],
+   "title": "SaveImage",
+   "properties": {},
+   "widgets_values": [
+    "mobile/no-background"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "mobile/no-background"
+   }
+  },
+  {
+   "id": 10,
+   "type": "LoadBackgroundRemovalModel",
+   "pos": [
+    100,
+    362
+   ],
+   "size": [
+    321.6919921875,
+    58
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "bg_removal_name",
+     "name": "bg_removal_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "bg_removal_name"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "bg_model",
+     "name": "bg_model",
+     "type": "BACKGROUND_REMOVAL",
+     "links": [
+      2
+     ]
+    }
+   ],
+   "title": "LoadBackgroundRemovalModel",
+   "properties": {
+    "Node name for S&R": "LoadBackgroundRemovalModel"
+   },
+   "widgets_values": [
+    "birefnet.safetensors"
+   ],
+   "widgets_values_named": {
+    "bg_removal_name": "birefnet.safetensors"
+   }
+  },
+  {
+   "id": 11,
+   "type": "RemoveBackground",
+   "pos": [
+    521.6919921875,
+    130
+   ],
+   "size": [
+    181.705078125,
+    46
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "bg_removal_model",
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 2
+    },
+    {
+     "localized_name": "image",
+     "name": "image",
+     "type": "IMAGE",
+     "link": 3
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "mask",
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      4
+     ]
+    }
+   ],
+   "title": "Find the subject",
+   "properties": {
+    "Node name for S&R": "RemoveBackground"
+   }
+  },
+  {
+   "id": 12,
+   "type": "InvertMask",
+   "pos": [
+    803.3970703125,
+    130
+   ],
+   "size": [
+    140,
+    26
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "mask",
+     "name": "mask",
+     "type": "MASK",
+     "link": 4
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "MASK",
+     "name": "MASK",
+     "type": "MASK",
+     "links": [
+      6
+     ]
+    }
+   ],
+   "title": "InvertMask",
+   "properties": {
+    "Node name for S&R": "InvertMask"
+   }
+  },
+  {
+   "id": 13,
+   "type": "JoinImageWithAlpha",
+   "pos": [
+    1043.3970703125,
+    130
+   ],
+   "size": [
+    185.8609375,
+    46
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "localized_name": "image",
+     "name": "image",
+     "type": "IMAGE",
+     "link": 5
+    },
+    {
+     "localized_name": "alpha",
+     "name": "alpha",
+     "type": "MASK",
+     "link": 6
+    }
+   ],
+   "outputs": [
+    {
+     "localized_name": "IMAGE",
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1
+     ]
+    }
+   ],
+   "title": "JoinImageWithAlpha",
+   "properties": {
+    "Node name for S&R": "JoinImageWithAlpha"
+   }
+  }
+ ],
+ "links": [
+  [
+   1,
+   13,
+   0,
+   8,
+   0,
+   "IMAGE"
+  ],
+  [
+   2,
+   10,
+   0,
+   11,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   3,
+   1,
+   0,
+   11,
+   1,
+   "IMAGE"
+  ],
+  [
+   4,
+   11,
+   0,
+   12,
+   0,
+   "MASK"
+  ],
+  [
+   5,
+   1,
+   0,
+   13,
+   0,
+   "IMAGE"
+  ],
+  [
+   6,
+   12,
+   0,
+   13,
+   1,
+   "MASK"
+  ]
+ ],
+ "groups": [],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 1,
+   "offset": [
+    0,
+    0
+   ]
+  }
+ },
+ "version": 0.4
+}
